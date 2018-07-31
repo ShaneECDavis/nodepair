@@ -16,15 +16,14 @@ const cat = require('./cat.js')
 process.stdout.write('prompt > ');
 
 process.stdin.on('data', (data) => {
-  const cmd = data.toString().trim();
-
+  const origCmd = data.toString().trim();
+  const [cmd, fileName] = origCmd.split(' ')
   if (cmd == "pwd") {
     pwd()
   } else if (cmd == 'ls'){
     ls()
-  } else if (cmd.slice(0,4) = "cat ") {
-    let cmd2 = cmd.slice(4, cmd.length);
-    cat(cmd2);
+  } else if (cmd == 'cat ') {
+    cat(fileName);
   }
 
   else {
